@@ -3,8 +3,8 @@ import fs from "fs/promises";
 import { fileURLToPath } from "url";
 import path from "path";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(_filename);
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.get("/form", (req, res) => {
 
 app.get("/preview", async (req, res) => {
     try {
-        const countFilePath = path.join(__dirname, "user_count.json");
+        const countFilePath = path.join(_dirname, "user_count.json");
         const fileData = await fs.readFile(countFilePath, "utf8");
         const countData = JSON.parse(fileData);
         countData.count += 1;
@@ -35,6 +35,10 @@ app.get("/preview", async (req, res) => {
     }
 });
 
-app.listen(port, '0.0.0.0', () => {
-    console.log(`application is listening on port ${port}`);
-});
+if (process.env.NODE_ENV !== "production" && process.env.NETLIFY !== "true") {
+    app.listen(port, () => {
+        console.log(`application is listening on port ${port}`);
+    });
+}
+
+export default app;

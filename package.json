@@ -2,7 +2,8 @@
   "dependencies": {
     "@netlify/blobs": "^10.7.4",
     "ejs": "^5.0.1",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "serverless-http": "^4.0.0"
   },
   "name": "cover_page_v2",
   "version": "1.0.0",
