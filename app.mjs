@@ -14,7 +14,7 @@ app.use(express.static("public"));
 //view engine
 app.set("view engine", "ejs");
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 app.get("/form", (req, res) => {
     res.render("form");
@@ -35,6 +35,6 @@ app.get("/preview", async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`application is listening on ${port}`);
+app.listen(port, '0.0.0.0', () => {
+    console.log(`application is listening on port ${port}`);
 });
