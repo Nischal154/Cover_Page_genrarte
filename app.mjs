@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 //view engine
 app.set("view engine", "ejs");
+app.set("views", path.join(_dirname, "views"));
 
 const port = process.env.PORT || 8080;
 

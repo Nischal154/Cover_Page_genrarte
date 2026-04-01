@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.mjs",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["views/**", "user_count.json"]
+      }
+    }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/app.mjs" }
+  ]
+}
