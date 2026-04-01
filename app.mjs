@@ -10,7 +10,7 @@ const app = express();
 
 //middleware
 app.use(express.urlencoded({ extended: true }));  
-app.use(express.static("public"));
+app.use(express.static(path.join(_dirname, "public")));
 //view engine
 app.set("view engine", "ejs");
 app.set("views", path.join(_dirname, "views"));

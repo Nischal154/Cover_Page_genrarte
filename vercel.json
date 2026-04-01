@@ -5,7 +5,7 @@
       "src": "app.mjs",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["views/**", "user_count.json"]
+        "includeFiles": ["views/**", "user_count.json", "public/**"]
       }
     }
   ],
