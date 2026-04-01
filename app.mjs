@@ -17,6 +17,10 @@ app.set("views", path.join(_dirname, "views"));
 
 const port = process.env.PORT || 8080;
 
+app.get("/", (req, res) => {
+    res.redirect("/form");
+});
+
 app.get("/form", (req, res) => {
     res.render("form");
 });
