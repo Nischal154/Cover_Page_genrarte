@@ -26,17 +26,25 @@ app.get("/form", (req, res) => {
 });
 
 app.get("/preview", async (req, res) => {
+    let countData = { count: 1 };
     try {
         const countFilePath = path.join(_dirname, "user_count.json");
         const fileData = await fs.readFile(countFilePath, "utf8");
-        const countData = JSON.parse(fileData);
+        countData = JSON.parse(fileData);
         countData.count += 1;
-        await fs.writeFile(countFilePath, JSON.stringify(countData, null, 2));
+        
+        // In Vercel, the file system is Read-Only. This will intentionally fail silently in production.
+        try {
+            await fs.writeFile(countFilePath, JSON.stringify(countData, null, 2));
+        } catch(writeErr) {
+            console.log("Ignored write error (Serverless Mode Active)");
+        }
 
         res.render("preview", { ...req.query, count: countData.count });
     } catch(err) {
+        // Fallback to safely render the preview even if the file is missing/broken completely
         console.error("Error updating count:", err);
-        res.status(500).send("Server Error");
+        res.render("preview", { ...req.query, count: "🚀" }); 
     }
 });
 
